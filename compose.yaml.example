@@ -1,0 +1,20 @@
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: gestao-beleza-db
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: gestao_beleza
+      POSTGRES_USER: ${DB_USERNAME:-admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Defina DB_PASSWORD no arquivo .env}
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
